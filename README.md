@@ -57,7 +57,7 @@ Dự án bao gồm các Controller xử lý các bài toán nghiệp vụ cụ t
 
 1.  **Clone dự án:**
     ```bash
-    git clone [https://github.com/manhtuan28/HocCoreMVC.git](https://github.com/manhtuan28/HocCoreMVC.git)
+    git clone https://github.com/manhtuan28/HocCoreMVC.git
     ```
 2.  **Mở dự án:**
     Mở file `HocCoreMVC.sln` bằng Visual Studio 2022.
