@@ -47,7 +47,11 @@ Dự án bao gồm các Controller xử lý các bài toán nghiệp vụ cụ t
 * **`ChaySoController`**: Xử lý các bài toán về vòng lặp, xử lý chuỗi hoặc thuật toán số học.
 
 ## 📸 Giao Diện Demo
-*(Bạn có thể thêm ảnh chụp màn hình các trang web của bạn vào đây)*
+### 1. Trang Chủ
+![Giao diện trang chủ WebDev Solutions](assets/Home.png)
+
+### 2. Bài Tập Demo
+![Bảng giá các gói dịch vụ](assets/Demo.png)
 
 ## 🚀 Cài Đặt & Chạy Dự Án
 
