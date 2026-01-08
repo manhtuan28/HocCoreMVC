@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Số chẵn lẻ";
+}
+
+<style>
+    .so-chan {
+        color: blue;
+        font-size: 20px;
+    }
+    
+    .so-le {
+        color: red;
+        font-size: 20px;
+    }
+</style>
+
+<div class="container">
+    @for(int i = 1; i <= 100; i++)
+    {
+        if(i % 2 == 0)
+        {
+            <span class="so-chan">@i</span>
+        }
+        else
+        {
+            <span class="so-le">@i</span>
+        }
+    }
+</div>

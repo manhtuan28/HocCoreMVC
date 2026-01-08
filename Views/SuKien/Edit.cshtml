@@ -1,0 +1,68 @@
+﻿@model HocCoreMVC.Models.DangKySuKien
+
+@{
+    ViewData["Title"] = "Chỉnh sửa thông tin";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-warning text-dark">
+                    <h4 class="mb-0"><i class="fas fa-edit"></i> Chỉnh sửa đăng ký</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit">
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="HoTen" class="form-label fw-bold"></label>
+                            <input asp-for="HoTen" class="form-control" placeholder="Nhập họ tên..." />
+                            <span asp-validation-for="HoTen" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label fw-bold"></label>
+                            <input asp-for="Email" class="form-control" placeholder="Nhập email..." />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="LoaiVe" class="form-label fw-bold"></label>
+                            <select asp-for="LoaiVe" class="form-select">
+                                <option value="Standard">Standard (500.000đ)</option>
+                                <option value="VIP">VIP (1.000.000đ)</option>
+                            </select>
+                            <span asp-validation-for="LoaiVe" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="SoVe" class="form-label fw-bold"></label>
+                            <input asp-for="SoVe" class="form-control" type="number" min="1" max="100" />
+                            <div class="form-text text-muted">Mua từ 5 vé trở lên sẽ được giảm giá 10%</div>
+                            <span asp-validation-for="SoVe" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            <a asp-action="Index" class="btn btn-secondary me-md-2">
+                                <i class="fas fa-arrow-left"></i> Quay lại
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Lưu thay đổi
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Web Bài Tập</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <style>
+        .top-banner {
+            height: 150px;
+            background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+        }
+
+        .main-navbar {
+            background-color: #4a69bd;
+        }
+
+        .sidebar-left {
+            background-color: #e1f0fa;
+            min-height: 600px;
+            padding: 20px;
+            border-right: 1px solid #ccc;
+        }
+
+        .sidebar-title {
+            color: #0c2461;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .exercise-link {
+            display: block;
+            padding: 10px;
+            color: #1e3799;
+            text-decoration: none;
+            border-bottom: 1px solid #b2bec3;
+            transition: all 0.2s;
+        }
+
+            .exercise-link:hover {
+                background-color: #4a69bd;
+                color: white;
+                padding-left: 15px;
+            }
+
+        .main-content {
+            padding: 20px;
+            background-color: #ffffff;
+        }
+
+        footer {
+            background-color: #4a69bd;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid px-0">
+        <div class="top-banner d-flex align-items-center justify-content-center">
+            <h1 class="text-white text-shadow display-4 fw-bold">WEB BÀI TẬP MVC</h1>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-sm navbar-dark main-navbar mb-3">
+        <div class="container">
+            <a class="navbar-brand" href="/">HOMEWORK</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item"><a class="nav-link" href="/">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Giới thiệu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Tin tức</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Tuyển sinh</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mb-5">
+        <div class="row">
+
+            <div class="col-md-3 sidebar-left">
+                <div class="sidebar-title">
+                    <i class="bi bi-list-task me-2"></i>DANH SÁCH BÀI TẬP
+                </div>
+
+                <a asp-controller="HinhChuNhat" asp-action="Index" class="exercise-link">
+                    Bài tập 1: Hình Chữ Nhật
+                </a>
+
+                <a asp-controller="TinhToan" asp-action="Index" class="exercise-link">
+                    Bài tập 2: Máy Tính (+ - * /)
+                </a>
+
+                <a asp-controller="HinhTamGiac" asp-action="Index" class="exercise-link">
+                    Bài tập 3: Hình Tam Giác
+                </a>
+
+                <a asp-controller="ChaySo" asp-action="Index" class="exercise-link">
+                    Bài tập 4: Chạy số
+                </a>
+
+                <a asp-controller="GioHang" asp-action="CheckOut" class="exercise-link">
+                    Bài tập 5: Giỏ hàng
+                </a>
+
+                <a asp-controller="DatPhong" asp-action="Index" class="exercise-link">
+                    Bài tập 6: Đặt Phòng
+                </a>
+
+                <a asp-controller="UngTuyen" asp-action="Index" class="exercise-link">
+                    Bài tập 7: Ứng Tuyển
+                </a>
+
+                <a asp-controller="SuKien" asp-action="Index" class="exercise-link">
+                    Bài tập 8: Sự Kiện
+                </a>
+            </div>
+
+            <div class="col-md-9 main-content">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            &copy; 2025 - Hệ thống quản lý bài tập thực hành ASP.NET MVC
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

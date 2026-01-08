@@ -1,0 +1,60 @@
+﻿@model HocCoreMVC.Models.TinhToanModel
+
+@{
+    ViewData["Title"] = "Máy Tính Đơn Giản";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6 col-lg-5">
+
+        <div class="card shadow-lg border-0 rounded-3">
+
+            <div class="card-header bg-success bg-gradient text-white text-center py-3">
+                <h3 class="mb-0 fw-bold"><i class="bi bi-calculator-fill me-2"></i>Máy Tính</h3>
+                <small>Chọn phép tính và nhập số</small>
+            </div>
+
+            <div class="card-body p-4">
+                <form asp-action="Index" method="post">
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="SoThuNhat" class="form-control" placeholder="Số thứ nhất" type="number" step="any" required />
+                        <label>Số thứ nhất (A)</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <select asp-for="PhepTinh" class="form-select" id="selectPhepTinh">
+                            <option value="Cong">➕ Cộng (+)</option>
+                            <option value="Tru">➖ Trừ (-)</option>
+                            <option value="Nhan">✖️ Nhân (*)</option>
+                            <option value="Chia">➗ Chia (/)</option>
+                        </select>
+                        <label for="selectPhepTinh">Chọn phép tính</label>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <input asp-for="SoThuHai" class="form-control" placeholder="Số thứ hai" type="number" step="any" required />
+                        <label>Số thứ hai (B)</label>
+                        <span asp-validation-for="SoThuHai" class="text-danger small ms-1"></span>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success btn-lg shadow-sm">
+                            Kết Quả
+                        </button>
+                    </div>
+                </form>
+
+                @if (Model.DaTinh)
+                {
+                    <div class="mt-4 animate__animated animate__fadeInUp">
+                        <div class="alert alert-light border border-success shadow-sm text-center">
+                            <p class="text-muted mb-1 text-uppercase small fw-bold">Kết quả phép tính</p>
+                            <h2 class="display-6 fw-bold text-success mb-0">@Model.KetQua</h2>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

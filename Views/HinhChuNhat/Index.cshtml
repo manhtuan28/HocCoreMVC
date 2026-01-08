@@ -1,0 +1,66 @@
+﻿@model HocCoreMVC.Models.HinhChuNhatModel
+
+@{
+    ViewData["Title"] = "Tính Hình Chữ Nhật";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+
+            <div class="card shadow-lg border-0 rounded-3">
+
+                <div class="card-header bg-primary text-white text-center py-3">
+                    <h3 class="mb-0 fw-bold">📐 Hình Chữ Nhật</h3>
+                    <small>Nhập thông số để tính toán</small>
+                </div>
+
+                <div class="card-body p-4">
+                    <form asp-action="Index" method="post">
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="ChieuDai" class="form-control" id="floatingDai" placeholder="Nhập chiều dài" type="number" step="any" required />
+                            <label for="floatingDai">Chiều Dài (m)</label>
+                        </div>
+
+                        <div class="form-floating mb-4">
+                            <input asp-for="ChieuRong" class="form-control" id="floatingRong" placeholder="Nhập chiều rộng" type="number" step="any" required />
+                            <label for="floatingRong">Chiều Rộng (m)</label>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-lg shadow-sm">
+                                🔄 Tính Toán Ngay
+                            </button>
+                            <a href="/HinhChuNhat" class="btn btn-outline-secondary btn-sm">Làm mới</a>
+                        </div>
+                    </form>
+
+                    @if (Model.DaTinh)
+                    {
+                        <div class="mt-4 animate__animated animate__fadeIn">
+                            <div class="alert alert-info border-start border-4 border-info shadow-sm" role="alert">
+                                <h5 class="alert-heading fw-bold text-center mb-3">✨ Kết Quả ✨</h5>
+
+                                <div class="row text-center">
+                                    <div class="col-6 border-end">
+                                        <p class="mb-0 text-muted small">Chu Vi</p>
+                                        <p class="fs-4 fw-bold text-primary">@Model.ChuVi</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="mb-0 text-muted small">Diện Tích</p>
+                                        <p class="fs-4 fw-bold text-danger">@Model.DienTich</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="card-footer text-muted text-center py-2 bg-light">
+                    <small>ASP.NET Core MVC & Bootstrap 5</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

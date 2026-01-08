@@ -1,0 +1,168 @@
+﻿@model HocCoreMVC.Models.GioHang
+@{
+    ViewData["Title"] = "Thanh toán an toàn";
+}
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .card-custom {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    .form-control {
+        border-radius: 0 5px 5px 0;
+        height: 45px;
+    }
+
+    .input-group-text {
+        border-radius: 5px 0 0 5px;
+        background-color: #fff;
+        border-right: none;
+    }
+
+    .form-control:focus {
+        box-shadow: none;
+        border-color: #ced4da;
+        border-left: 1px solid #ced4da;
+    }
+
+    .input-group-text + .form-control {
+        border-left: none;
+    }
+
+    .total-section {
+        background: linear-gradient(45deg, #007bff, #6610f2);
+        color: white;
+        border-radius: 10px;
+        padding: 20px;
+    }
+</style>
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-7 mb-4">
+            <div class="card card-custom h-100">
+                <div class="card-header bg-white border-0 pt-4 pb-0">
+                    <h4 class="font-weight-bold text-primary">
+                        <i class="fas fa-shipping-fast mr-2"></i>Thông tin giao hàng
+                    </h4>
+                    <p class="text-muted small">Vui lòng điền đầy đủ thông tin bên dưới</p>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Checkout" method="post">
+                        <div class="form-group mb-3">
+                            <label class="font-weight-bold">Họ và tên</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-user text-muted"></i></span>
+                                <input asp-for="HoTen" class="form-control" placeholder="Ví dụ: Nguyễn Văn A" required />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 form-group mb-3">
+                                <label class="font-weight-bold">Số điện thoại</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-phone text-muted"></i></span>
+                                    <input asp-for="SoDienThoai" class="form-control" placeholder="09xxxxxxx" required />
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group mb-3">
+                                <label class="font-weight-bold">Số lượng mua</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-layer-group text-muted"></i></span>
+                                    <input asp-for="SoLuongSanPham" class="form-control" type="number" min="1" required />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="font-weight-bold">Địa chỉ nhận hàng</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-map-marker-alt text-muted"></i></span>
+                                <input asp-for="DiaChi" class="form-control" placeholder="Số nhà, đường, phường, xã..." required />
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label class="font-weight-bold">Đơn giá (VNĐ)</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-tag text-muted"></i></span>
+                                <input asp-for="DonGia" class="form-control" type="number" required />
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg btn-block shadow font-weight-bold">
+                            XÁC NHẬN ĐẶT HÀNG <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            @if (Model != null && Model.ThanhTien > 0)
+            {
+                <div class="card card-custom border-primary">
+                    <div class="card-header bg-white border-bottom pt-4">
+                        <h5 class="text-uppercase font-weight-bold text-dark text-center">
+                            Chi tiết đơn hàng
+                        </h5>
+                        <div class="text-center text-muted small">Cảm ơn bạn đã mua sắm!</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3 border-bottom pb-2">
+                            <p class="mb-1"><strong>Khách hàng:</strong> @Model.HoTen</p>
+                            <p class="mb-1"><strong>SĐT:</strong> @Model.SoDienThoai</p>
+                            <p class="mb-1 text-truncate"><strong>Địa chỉ:</strong> @Model.DiaChi</p>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">Tạm tính (@Model.SoLuongSanPham x @Model.DonGia.ToString("n0")):</span>
+                            <span class="font-weight-bold">@Model.ThanhTien.ToString("n0") đ</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-3 align-items-center">
+                            <span class="text-muted">Phí vận chuyển:</span>
+                            @if (Model.Phi == 0)
+                            {
+                                <span class="badge badge-success px-3 py-2 rounded-pill">
+                                    <i class="fas fa-gift mr-1"></i> Miễn phí
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="text-danger font-weight-bold">+ @Model.Phi.ToString("n0") đ</span>
+                            }
+                        </div>
+
+                        <div class="total-section mt-4 d-flex justify-content-between align-items-center">
+                            <span style="font-size: 1.1rem">TỔNG CỘNG:</span>
+                            <span style="font-size: 1.8rem; font-weight: bold;">
+                                @Model.TongThanhToan.ToString("n0") <small style="font-size: 1rem">đ</small>
+                            </span>
+                        </div>
+
+                        @if (Model.Phi > 0)
+                        {
+                            <div class="alert alert-warning mt-3 mb-0 small text-center">
+                                <i class="fas fa-info-circle"></i> Mua thêm <strong>@((500000 - Model.ThanhTien).ToString("n0")) đ</strong> để được FreeShip!
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="text-center text-muted mt-5">
+                    <i class="fas fa-shopping-cart fa-5x mb-3 text-black-50"></i>
+                    <p>Giỏ hàng của bạn đang trống thông tin.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

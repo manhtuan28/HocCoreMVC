@@ -1,0 +1,145 @@
+﻿@model HocCoreMVC.Models.UngTuyen
+
+@{
+    ViewData["Title"] = "Tuyển dụng nhân tài";
+}
+
+<style>
+    .bg-gradient-info {
+        background: linear-gradient(135deg, #17a2b8, #138496);
+        color: white;
+    }
+
+    .form-control:focus {
+        border-color: #17a2b8;
+        box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.25);
+    }
+
+    .card-custom {
+        border: none;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        border-radius: 10px;
+    }
+</style>
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+        <h2 class="text-info font-weight-bold">CHÀO MỪNG ỨNG VIÊN</h2>
+        <p class="text-muted">Hãy gia nhập đội ngũ của chúng tôi để cùng phát triển</p>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6 mb-4">
+            <div class="card card-custom h-100">
+                <div class="card-header bg-gradient-info">
+                    <h5 class="mb-0"><i class="fas fa-file-signature mr-2"></i> Điền hồ sơ</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Index" method="post">
+                        <div class="form-group">
+                            <label>Họ và tên:</label>
+                            <input asp-for="HoTen" class="form-control" placeholder="Nguyễn Văn A" />
+                            <span asp-validation-for="HoTen" class="text-danger small"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label>Email:</label>
+                                <input asp-for="Email" class="form-control" placeholder="name@example.com" />
+                                <span asp-validation-for="Email" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Số điện thoại:</label>
+                                <input asp-for="SoDienThoai" class="form-control" placeholder="09xxx..." />
+                                <span asp-validation-for="SoDienThoai" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Vị trí mong muốn:</label>
+                            <select asp-for="ViTriUngTuyen" class="form-control">
+                                <option value="">-- Chọn vị trí --</option>
+                                <option value="Thực tập sinh .NET">Thực tập sinh .NET</option>
+                                <option value="Lập trình viên Backend">Lập trình viên Backend</option>
+                                <option value="Lập trình viên Frontend">Lập trình viên Frontend</option>
+                                <option value="Tester / QA">Tester / QA</option>
+                                <option value="Quản lý dự án (PM)">Quản lý dự án (PM)</option>
+                            </select>
+                            <span asp-validation-for="ViTriUngTuyen" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="d-block">Kinh nghiệm làm việc:</label>
+
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="kn1" asp-for="KinhNghiem" value="Chưa có kinh nghiệm" class="custom-control-input">
+                                <label class="custom-control-label" for="kn1">Mới tốt nghiệp</label>
+                            </div>
+
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="kn2" asp-for="KinhNghiem" value="1 - 2 năm" class="custom-control-input">
+                                <label class="custom-control-label" for="kn2">1 - 2 năm</label>
+                            </div>
+
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="kn3" asp-for="KinhNghiem" value="Trên 3 năm" class="custom-control-input">
+                                <label class="custom-control-label" for="kn3">Trên 3 năm</label>
+                            </div>
+                            <span asp-validation-for="KinhNghiem" class="text-danger small d-block"></span>
+                        </div>
+
+                        <hr />
+                        <button type="submit" class="btn btn-info btn-block font-weight-bold shadow">
+                            <i class="fas fa-paper-plane mr-1"></i> GỬI HỒ SƠ
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            @if (Context.Request.Method == "POST" && ViewData.ModelState.IsValid)
+            {
+                <div class="card card-custom border-success h-100">
+                    <div class="card-header bg-success text-white text-center">
+                        <i class="fas fa-check-circle fa-3x mb-2"></i>
+                        <h4 class="mb-0">ỨNG TUYỂN THÀNH CÔNG</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-center text-muted">Cảm ơn bạn đã gửi hồ sơ. Chúng tôi đã nhận được thông tin:</p>
+
+                        <ul class="list-group list-group-flush mt-4">
+                            <li class="list-group-item">
+                                <strong>Họ tên:</strong> <span class="float-right">@Model.HoTen</span>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Vị trí:</strong> <span class="float-right text-info font-weight-bold text-uppercase">@Model.ViTriUngTuyen</span>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Kinh nghiệm:</strong> <span class="float-right badge badge-warning">@Model.KinhNghiem</span>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Liên hệ:</strong> <br />
+                                <small><i class="fas fa-envelope"></i> @Model.Email</small><br />
+                                <small><i class="fas fa-phone"></i> @Model.SoDienThoai</small>
+                            </li>
+                        </ul>
+
+                        <div class="alert alert-warning mt-4 text-center">
+                            <small>Bộ phận nhân sự sẽ liên hệ với bạn trong vòng 3 ngày làm việc.</small>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="d-flex flex-column align-items-center justify-content-center h-100 text-muted p-5 bg-light rounded" style="opacity: 0.7">
+                    <i class="fas fa-id-card fa-5x mb-3 text-secondary"></i>
+                    <h5>Hồ sơ của bạn sẽ hiển thị tại đây</h5>
+                    <p class="small text-center">Vui lòng điền đầy đủ thông tin bên trái để xem trước hồ sơ.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

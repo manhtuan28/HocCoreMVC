@@ -1,0 +1,61 @@
+﻿@model HocCoreMVC.Models.DangKySuKien
+
+@{
+    ViewData["Title"] = "Xóa đăng ký";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <div class="alert alert-danger shadow-sm" role="alert">
+                <h4 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> Cảnh báo!</h4>
+                <p class="mb-0">Bạn có chắc chắn muốn xóa khách hàng này khỏi danh sách không? Hành động này không thể hoàn tác.</p>
+            </div>
+
+            <div class="card border-danger shadow">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="mb-0">Thông tin khách hàng cần xóa</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-4">Họ và tên:</dt>
+                        <dd class="col-sm-8">@Model.HoTen</dd>
+
+                        <dt class="col-sm-4">Email:</dt>
+                        <dd class="col-sm-8">@Model.Email</dd>
+
+                        <dt class="col-sm-4">Loại vé:</dt>
+                        <dd class="col-sm-8">
+                            <span class="badge @(Model.LoaiVe == "VIP" ? "bg-warning text-dark" : "bg-secondary")">
+                                @Model.LoaiVe
+                            </span>
+                        </dd>
+
+                        <dt class="col-sm-4">Số lượng vé:</dt>
+                        <dd class="col-sm-8">@Model.SoVe</dd>
+
+                        <dt class="col-sm-4">Tổng tiền:</dt>
+                        <dd class="col-sm-8 text-danger fw-bold">
+                            @Model.ThanhTien.ToString("#,##0") VNĐ
+                        </dd>
+                    </dl>
+                </div>
+
+                <div class="card-footer bg-white d-flex justify-content-end gap-2">
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" asp-for="Id" />
+
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="fas fa-times"></i> Hủy bỏ
+                        </a>
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-trash-alt"></i> Xác nhận xóa
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

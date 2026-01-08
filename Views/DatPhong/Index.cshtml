@@ -1,0 +1,139 @@
+﻿@model HocCoreMVC.Models.DatPhong
+
+@{
+    ViewData["Title"] = "Đặt Phòng Khách Sạn";
+}
+
+<style>
+    .input-group-text {
+        min-width: 45px;
+        justify-content: center;
+    }
+
+    .bg-gradient-primary {
+        background: linear-gradient(45deg, #4e73df, #224abe);
+        color: white;
+    }
+</style>
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow border-0 h-100">
+                <div class="card-header bg-gradient-primary">
+                    <h4 class="mb-0"><i class="fas fa-suitcase-rolling mr-2"></i> Thông tin đặt phòng</h4>
+                </div>
+                <div class="card-body">
+
+                    @if (!string.IsNullOrEmpty(Model.ThongBaoLoi))
+                    {
+                        <div class="alert alert-danger">@Model.ThongBaoLoi</div>
+                    }
+
+                    <form asp-action="Index" method="post">
+                        <div class="form-group mb-3">
+                            <label class="font-weight-bold">Họ tên khách hàng</label>
+                            <input asp-for="HoTen" class="form-control" placeholder="Nhập tên..." required />
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 form-group mb-3">
+                                <label class="font-weight-bold">Nhận phòng</label>
+                                <input asp-for="NgayNhanPhong" class="form-control" type="date" />
+                            </div>
+                            <div class="col-md-6 form-group mb-3">
+                                <label class="font-weight-bold">Trả phòng</label>
+                                <input asp-for="NgayTraPhong" class="form-control" type="date" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 form-group mb-3">
+                                <label>Người lớn</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    <input asp-for="SoNguoiLon" class="form-control" type="number" min="1" required />
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group mb-3">
+                                <label>Trẻ em <small class="text-muted">(+100k/bé)</small></label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-child"></i></span>
+                                    <input asp-for="SoTreEm" class="form-control" type="number" min="0" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr />
+                        <button type="submit" class="btn btn-primary btn-block btn-lg w-100 shadow">
+                            <i class="fas fa-calculator"></i> Kiểm tra & Tính tiền
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            @if (Model.SoNgayO > 0 && string.IsNullOrEmpty(Model.ThongBaoLoi))
+            {
+                <div class="card shadow border-success h-100">
+                    <div class="card-header bg-success text-white">
+                        <h4 class="mb-0 text-center">HÓA ĐƠN TẠM TÍNH</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="text-center text-uppercase text-primary font-weight-bold mb-4">
+                            Khách: @Model.HoTen
+                        </h5>
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span><i class="fas fa-calendar-check text-success"></i> Check-in:</span>
+                                <strong>@Model.NgayNhanPhong.ToString("dd/MM/yyyy")</strong>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span><i class="fas fa-calendar-times text-danger"></i> Check-out:</span>
+                                <strong>@Model.NgayTraPhong.ToString("dd/MM/yyyy")</strong>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between bg-light">
+                                <span>Số đêm lưu trú:</span>
+                                <span class="badge badge-primary badge-pill" style="font-size: 1rem">@Model.SoNgayO đêm</span>
+                            </li>
+
+                            <li class="list-group-item mt-3">
+                                <small class="text-muted">Chi tiết:</small><br />
+                                <div class="d-flex justify-content-between">
+                                    <span>Giá phòng (@Model.SoNgayO đêm):</span>
+                                    <span>@((1500000 * Model.SoNgayO).ToString("n0")) đ</span>
+                                </div>
+                                @if (Model.SoTreEm > 0)
+                                {
+                                    <div class="d-flex justify-content-between text-danger">
+                                        <span>Phụ thu trẻ em (@Model.SoTreEm bé x 100k):</span>
+                                        <span>+ @((Model.SoTreEm * 100000 * Model.SoNgayO).ToString("n0")) đ</span>
+                                    </div>
+                                }
+                            </li>
+
+                            <li class="list-group-item text-center mt-3 border-0">
+                                <span class="text-muted text-uppercase">Tổng thanh toán</span>
+                                <div class="display-4 text-danger font-weight-bold">
+                                    @Model.TongTien.ToString("n0") <span style="font-size: 20px">VNĐ</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-footer text-center">
+                        <button class="btn btn-outline-success">Xác nhận đặt phòng</button>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="d-flex align-items-center justify-content-center h-100 text-muted flex-column opacity-50 p-5 border rounded" style="background-color: #f8f9fa;">
+                    <i class="fas fa-hotel fa-4x mb-3"></i>
+                    <p>Vui lòng nhập thông tin để xem báo giá.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

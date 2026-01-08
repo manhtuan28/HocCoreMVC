@@ -1,0 +1,77 @@
+﻿@model HocCoreMVC.Models.HinhTamGiacModel
+
+@{
+    ViewData["Title"] = "Tính Hình Tam Giác";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8 col-lg-6">
+
+        <div class="card shadow-lg border-0 rounded-3">
+
+            <div class="card-header bg-warning bg-gradient text-dark text-center py-3">
+                <h3 class="mb-0 fw-bold"><i class="bi bi-triangle-fill me-2"></i>Hình Tam Giác</h3>
+                <small>Nhập độ dài 3 cạnh (A, B, C)</small>
+            </div>
+
+            <div class="card-body p-4">
+                <form asp-action="Index" method="post">
+
+                    <div class="row g-2 mb-4">
+                        <div class="col-md-4">
+                            <div class="form-floating">
+                                <input asp-for="CanhA" class="form-control" placeholder="Cạnh A" type="number" step="any" required />
+                                <label>Cạnh A</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-floating">
+                                <input asp-for="CanhB" class="form-control" placeholder="Cạnh B" type="number" step="any" required />
+                                <label>Cạnh B</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-floating">
+                                <input asp-for="CanhC" class="form-control" placeholder="Cạnh C" type="number" step="any" required />
+                                <label>Cạnh C</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mb-3">
+                        <span asp-validation-for="CanhC" class="text-danger fw-bold animate__animated animate__shakeX d-block"></span>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-warning btn-lg shadow-sm text-dark fw-bold">
+                            <i class="bi bi-magic me-2"></i>Tính Toán
+                        </button>
+                    </div>
+                </form>
+
+                @if (Model.DaTinh)
+                {
+                    <div class="mt-4 animate__animated animate__fadeInUp">
+                        <div class="alert alert-light border border-warning shadow-sm">
+                            <h5 class="alert-heading fw-bold text-center text-warning mb-3">✨ Kết Quả ✨</h5>
+
+                            <div class="row text-center">
+                                <div class="col-6 border-end">
+                                    <p class="mb-0 text-muted small text-uppercase">Chu Vi</p>
+                                    <p class="fs-3 fw-bold text-dark">@Model.ChuVi</p>
+                                </div>
+                                <div class="col-6">
+                                    <p class="mb-0 text-muted small text-uppercase">Diện Tích</p>
+                                    <p class="fs-3 fw-bold text-danger">@Model.DienTich</p>
+                                </div>
+                            </div>
+                            <div class="text-center mt-2">
+                                <small class="text-muted fst-italic">(Tính theo công thức Heron)</small>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

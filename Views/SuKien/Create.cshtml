@@ -1,0 +1,35 @@
+﻿@model HocCoreMVC.Models.DangKySuKien
+
+<h2>Đăng ký tham gia</h2>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div class="mb-3">
+                <label asp-for="HoTen" class="form-label"></label>
+                <input asp-for="HoTen" class="form-control" />
+                <span asp-validation-for="HoTen" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="LoaiVe" class="form-label"></label>
+                <select asp-for="LoaiVe" class="form-select">
+                    <option value="Standard">Standard (500.000đ)</option>
+                    <option value="VIP">VIP (1.000.000đ)</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="SoVe" class="form-label"></label>
+                <input asp-for="SoVe" class="form-control" type="number" min="1" />
+                <span asp-validation-for="SoVe" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Đăng ký ngay</button>
+            <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+        </form>
+    </div>
+</div>
